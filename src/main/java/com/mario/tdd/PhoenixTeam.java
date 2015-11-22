@@ -1,5 +1,7 @@
 package com.mario.tdd;
 
+import org.springframework.util.Assert;
+
 /**
  * Clase que indica los bugs que ha resuelto el equipot Fenix
  * 
@@ -16,6 +18,7 @@ public class PhoenixTeam {
 	 * @param bugsResolved
 	 */
 	public PhoenixTeam(int bugsResolved) {
+		Assert.isTrue(bugsResolved >= 0, "Los bugs deben ser mayores o igual a 0");
 		this.bugsResolved = bugsResolved;
 	}
 
