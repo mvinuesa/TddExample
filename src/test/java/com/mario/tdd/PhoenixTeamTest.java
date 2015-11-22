@@ -15,26 +15,31 @@ import junitparams.Parameters;
 @RunWith(JUnitParamsRunner.class)
 public class PhoenixTeamTest {
 
-	private static final int THREE_BUGS_RESOLVED = 3;
-
 	public Object[] illegalNbOfBugs() {
 		return $(-10, -1);
 	}
 
+	public Object[] nbOfBugsResolved() {
+		return $(0, 2, 40, 5000);
+	}
+
 	/**
-	 * Test que prueba el constructor de la clase {@link PhoenixTeam}
+	 * Test que prueba el constructor de la clase {@link PhoenixTeam} con
+	 * valores validos
 	 */
 	@Test
-	public void contructorMustSetBugResolve() {
-		PhoenixTeam phoenixTeam = new PhoenixTeam(THREE_BUGS_RESOLVED);
+	@Parameters(method = "nbOfBugsResolved")
+	public void contructorMustSetBugsResolved(int nbOfBugsResolved) {
+		PhoenixTeam phoenixTeam = new PhoenixTeam(nbOfBugsResolved);
 
-		Assert.assertEquals(THREE_BUGS_RESOLVED + " se han pasado al constructor pero solo "
-				+ phoenixTeam.getBugsResolved() + " fuerons devueltos", THREE_BUGS_RESOLVED,
+		Assert.assertEquals(nbOfBugsResolved + " se han pasado al constructor pero solo "
+				+ phoenixTeam.getBugsResolved() + " fuerons devueltos", nbOfBugsResolved,
 				phoenixTeam.getBugsResolved());
 	}
 
 	/**
 	 * Test que prueba valores invalidos del constructor
+	 * 
 	 * @param illegalNbOfBugs
 	 */
 	@Test(expected = IllegalArgumentException.class)
